@@ -30,14 +30,9 @@ function Navigation() {
                   Contact
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/blog">
-                  Blog
-                </NavLink>
-              </li>
               <li className="nav-right">
-                <NavLink className="nav-link" to="/login">
-                  Login
+                <NavLink className="nav-link" to="/dashboard">
+                  Dashboard
                 </NavLink>
               </li>
             </ul>

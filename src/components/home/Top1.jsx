@@ -18,14 +18,14 @@ export default class Top1 extends Component {
 				
 				<div className="column left">
 					<span>
-						<img className="img" src="../../shop1.jpg" />
-						<img className="img" src="../../shop2.jpg" />
+						<img className="img" src="../../images/shop1.jpg" />
+						<img className="img" src="../../images/shop2.jpg" />
 					</span>
 				</div>
 				<div className="column middle">
 					<span>
-						<img className="img" src="../../loyalty1.jpg" />
-						<img className="img" src="../../loyalty2.jpg" />
+						<img className="img" src="../../images/loyalty1.jpg" />
+						<img className="img" src="../../images/loyalty2.jpg" />
 					</span>
 				</div>
 				<div className="column right">
