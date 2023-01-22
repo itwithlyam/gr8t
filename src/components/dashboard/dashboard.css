@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+}
+p {
+    text-align: center;
+}
+.bold {
+    font-weight: bold;
+}
+ul .dashboard {
+    background-color: white;
+}
+li .dashboard {
+    float: inline-end;
+    padding: 12px;
+}

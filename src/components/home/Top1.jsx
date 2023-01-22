@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 import './Top1.css'
 
 export default class Top1 extends Component {

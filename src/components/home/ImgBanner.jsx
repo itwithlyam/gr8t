@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import React from 'react'
 import './ImgBanner.css'
 
 export default class ImgBanner extends Component {

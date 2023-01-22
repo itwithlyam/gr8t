@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Login.css';
 
 async function loginUser(credentials) {
- return fetch('http://localhost:8080/login', {
+ return fetch('http://localhost:8080/api/users/login', {
    method: 'POST',
    headers: {
      'Content-Type': 'application/json'
@@ -23,6 +23,7 @@ export default function Login({ setToken }) {
       username,
       password
     });
+    localStorage.setItem('uname', username)
     setToken(token);
   }
 
