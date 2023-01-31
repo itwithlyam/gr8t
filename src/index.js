@@ -9,8 +9,8 @@ import {
   About,
   Contact,
   Dashboard,
-  Login,
   Members,
+  Location
 } from "./components";
 
 ReactDOM.render(
@@ -20,8 +20,9 @@ ReactDOM.render(
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/members" elment={<Members />} />
+      <Route path="/members" element={<Members />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/:id" element={<Location />} />
     </Routes>
     <Footer />
   </Router>,
