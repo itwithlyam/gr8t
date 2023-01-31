@@ -7,10 +7,27 @@ p {
 .bold {
     font-weight: bold;
 }
-ul .dashboard {
+.dashboard {
     background-color: white;
 }
-li .dashboard {
-    float: inline-end;
-    padding: 12px;
+.dash-loc {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    border-radius: 5px;
+    width: 40%;
+    margin: auto;
+}
+.dash-loc:hover {
+    border-color: purple;
+}
+
+.dash-loc-but {
+    width: 100%;
+    background-color: white;
+}
+
+.dash-loc-but:hover {
+    width: 100%;
+    background-color: lavender;
 }

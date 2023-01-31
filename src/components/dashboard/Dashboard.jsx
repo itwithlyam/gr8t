@@ -30,15 +30,18 @@ function Dashboard() {
   } 
   return (
     <>
-      <h1>Dashboard</h1>
+      <h1>Locations</h1>
       <ul className="dashboard">
         {locations.map(element => (
-          <li className="dashboard" key={element._id}>
-            <div>
-              <p className="bold">{element.name}</p>
-              <p>ID: {element._id}</p>
-            </div>
-          </li>
+          <>
+              <div className="dash-loc" key={element._id}>
+                <button onClick={() => {window.location.href = '/dashboard/'+element._id}} className="dash-loc-but">
+                  <p className="bold">{element.name}</p>
+                  <p>ID: {element._id}</p>
+                </button>
+              </div>
+            <br />
+          </>
         ))}
       </ul>
     </>
