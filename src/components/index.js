@@ -6,4 +6,6 @@ export { default as Contact } from "./Contact";
 export { default as Dashboard } from "./dashboard/Dashboard";
 export { default as Login } from "./Login"
 export { default as Members } from "./Members"
+export { default as UserLocation } from "./Location"
+export { default as UserLocations } from "./Locations"
 export { default as Location } from "./dashboard/Location"

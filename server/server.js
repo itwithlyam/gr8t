@@ -67,9 +67,7 @@ app.get('/api/locations', (req, res) => {
     db = db.db("gr8t")
     let cl = db.collection("locations")
     let data = {}
-    console.log(req.query.id)
-    data = await cl.find({user: req.query.user}).toArray()
-  console.log(data)
+    data = await cl.find(req.query.id ? {_id: ObjectId(req.query.id)} : {}).toArray()
     return res.send(data)
   })
 })
@@ -79,9 +77,7 @@ app.get('/api/:location', (req, res) => {
     db = db.db("gr8t")
     let cl = db.collection("locations")
     let data = {}
-    console.log(req.query.id)
     data = await cl.find({_id: ObjectId(req.params.location)}).toArray()
-  console.log(data)
     return res.send(data)
   })
 })
@@ -106,7 +102,6 @@ app.get('/api/:location/memberships', (req, res) => {
     db = db.db("gr8t")
     let cl = db.collection("memberships")
     let data = await cl.find({location: ObjectId(req.params.location)}).toArray()
-  console.log(data)
     return res.send(data)
   })
 })
@@ -115,9 +110,12 @@ app.post('/api/:location/memberships', (req, res) => {
     if (err) throw err
     db = db.db("gr8t")
     let cl = db.collection("memberships")
+    let exist = await cl.findOne({user: req.body.user, location: ObjectId(req.params.location)})
+    if (exist) return res.send({error: "already"})
+    console.log(req.body.user)
     cl.insertOne({user: req.body.user, location: ObjectId(req.params.location)})
   
-    return res.send()
+    return res.send({})
   })
 })
 app.delete('/api/:location/memberships', (req, res) => {

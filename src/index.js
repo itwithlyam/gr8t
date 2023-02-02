@@ -10,7 +10,9 @@ import {
   Contact,
   Dashboard,
   Members,
-  Location
+  Location,
+  UserLocations,
+  UserLocation
 } from "./components";
 
 ReactDOM.render(
@@ -23,6 +25,8 @@ ReactDOM.render(
       <Route path="/members" element={<Members />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dashboard/:id" element={<Location />} />
+      <Route path="/location/:id" element={<UserLocation />} />
+      <Route path="/location" element={<UserLocations />} />
     </Routes>
     <Footer />
   </Router>,

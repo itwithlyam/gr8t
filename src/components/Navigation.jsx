@@ -35,6 +35,11 @@ function Navigation() {
                   Dashboard
                 </NavLink>
               </li>
+              <li className="nav-left">
+                <NavLink className="nav-link" to="/location">
+                  Locations
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

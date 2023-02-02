@@ -38,3 +38,14 @@ p {
 .loc-2 {
     text-align: center;
 }
+.loc-but-div {
+    text-align: center;
+}
+.loc-but {
+    padding: 12px 28px;
+    border-radius: 8px;
+    background-color: white;
+}
+.loc-but:hover {
+    background-color: lavender;
+}

@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import Login from '../Login';
-import useToken from './useToken';
+import Login from './Login';
+import useToken from './dashboard/useToken';
 
-import './dashboard.css'
+import './dashboard/dashboard.css'
 
 
-function Dashboard() {
+function Locations() {
   const { token, setToken } = useToken();  
 
   if(!token) {
@@ -18,7 +18,7 @@ function Dashboard() {
 
   if (counter === 0) {
     console.log("hmmm") 
-    fetch("http://localhost:8080/api/locations?user="+localStorage.getItem("uname")).then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/locations").then(data => data.json()).then(payload => {
       setLocations(payload)
       count(1)
     })
@@ -30,7 +30,7 @@ function Dashboard() {
         {locations.map(element => (
           <>
               <div className="dash-loc" key={element._id}>
-                <button onClick={() => {window.location.href = '/dashboard/'+element._id}} className="dash-loc-but">
+                <button onClick={() => {window.location.href = '/location/'+element._id}} className="dash-loc-but">
                   <p className="bold">{element.name}</p>
                   <p>ID: {element._id}</p>
                 </button>
@@ -43,4 +43,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Locations;
