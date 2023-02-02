@@ -13,6 +13,13 @@ dotenv.config()
 app.use(cors());
 app.use(bodyParser.json())
 
+const myLogger = function (req, res, next) {
+  console.log('LOGGING: '+req.path)
+  next()
+}
+
+app.use(myLogger)
+
 // Login
 app.post('/api/users/login', async (req, res) => {
   MongoClient.connect(process.env.URI, async (err, db) => {
