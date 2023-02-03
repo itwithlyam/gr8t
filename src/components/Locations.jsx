@@ -8,13 +8,13 @@ import './dashboard/dashboard.css'
 function Locations() {
   const { token, setToken } = useToken();  
 
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
-
   const [locations, setLocations] = useState([])
   const [counter, count] = useState(0)
   console.log(locations)
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
 
   if (counter === 0) {
     console.log("hmmm") 

@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json())
 
 const myLogger = function (req, res, next) {
-  console.log('LOGGING: '+req.path)
+  console.log('LOGGING: '+req.method+" "+req.originalUrl)
   next()
 }
 
@@ -73,9 +73,12 @@ app.get('/api/locations', (req, res) => {
     if (err) throw err
     db = db.db("gr8t")
     let cl = db.collection("locations")
-    let data = {}
-    data = await cl.find(req.query.id ? {_id: ObjectId(req.query.id)} : {}).toArray()
-    return res.send(data)
+    let byId = await cl.find({_id: ObjectId(req.query.id)}).toArray()
+    let byUser = await cl.find({user: req.query.user}).toArray()
+    let byAll = await cl.find({}).toArray()
+    if (req.query.id) return res.send(byId)
+    if (req.query.user) return res.send(byUser)
+    else return res.send(byAll)
   })
 })
 app.get('/api/:location', (req, res) => {
@@ -93,7 +96,7 @@ app.post('/api/locations', (req, res) => {
     if (err) throw err
     db = db.db("gr8t")
     let cl = db.collection("locations")
-    cl.insertOne({user: req.query.user, name: req.body.name})
+    cl.insertOne({user: req.body.user, name: req.body.name})
   
     return res.send()
   })

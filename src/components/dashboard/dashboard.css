@@ -49,3 +49,6 @@ p {
 .loc-but:hover {
     background-color: lavender;
 }
+.loc-logout:hover {
+    background-color: #ffcc99 !important;
+}

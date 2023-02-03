@@ -8,12 +8,11 @@ import './dashboard.css'
 function Dashboard() {
   const { token, setToken } = useToken();  
 
+  const [locations, setLocations] = useState([])
+  const [counter, count] = useState(0)
   if(!token) {
     return <Login setToken={setToken} />
   }
-
-  const [locations, setLocations] = useState([])
-  const [counter, count] = useState(0)
   console.log(locations)
 
   if (counter === 0) {
@@ -38,6 +37,21 @@ function Dashboard() {
             <br />
           </>
         ))}
+        <div className="login-buttons">
+          <button className="loc-but" onClick={() => {
+                  let ans = prompt("Location name")
+                  fetch("http://localhost:8080/api/locations", {
+                    method: "POST",
+                    body: JSON.stringify({ name: ans, user: localStorage.getItem("uname") }),
+                    headers: {"Content-Type": "application/json"}
+                  })
+                }}>New</button>
+          <button className="loc-but loc-logout" onClick={() => {
+                  localStorage.removeItem("uname")
+                  localStorage.removeItem("token")
+                  window.location.reload()
+                }}>Logout</button>
+        </div>
       </ul>
     </>
   );
