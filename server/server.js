@@ -101,8 +101,17 @@ app.post('/api/locations', (req, res) => {
     return res.send()
   })
 })
-app.patch('/api/locations', (req, res) => {
-  
+app.delete('/api/:location', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("locations")
+    let del = await cl.deleteOne({_id: ObjectId(req.params.location)})
+    if (del.deletedCount != 1) res.status(400)
+    else res.status(204)
+
+    return res.send()
+  })
 })
 
 // Memberships

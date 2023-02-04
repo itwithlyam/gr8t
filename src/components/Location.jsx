@@ -11,17 +11,17 @@ export default function UserLocation() {
     
 
     console.log("hmmm") 
-    fetch("http://localhost:8080/api/"+params.id).then(data => data.json()).then(payload => {
+    fetch("http://77.68.127.58:8080/api/"+params.id).then(data => data.json()).then(payload => {
         if (!loc[0]) return setLoc(payload)
         if (loc[0]._id != payload[0]._id) setLoc(payload)
     })
-    fetch("http://localhost:8080/api/"+params.id+"/memberships").then(data => data.json()).then(payload => {
+    fetch("http://77.68.127.58:8080/api/"+params.id+"/memberships").then(data => data.json()).then(payload => {
         if (!mem[0]) return setMem(payload)
         if (mem[mem.length-1]._id != payload[mem.length-1]._id) setMem(payload)
     })
 
     const member = () => {
-        fetch("http://localhost:8080/api/"+params.id+"/memberships", {
+        fetch("http://77.68.127.58:8080/api/"+params.id+"/memberships", {
             method: "POST",
             body: JSON.stringify({user: localStorage.getItem("uname")}),
             headers: {"Content-Type": "application/json"}
