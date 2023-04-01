@@ -49,6 +49,9 @@ p {
 .loc-but:hover {
     background-color: lavender;
 }
+.svg-but:hover {
+    fill: rgba(128, 0, 128, 0.8);
+}
 .loc-logout:hover {
     background-color: #ffcc99 !important;
 }
@@ -56,4 +59,11 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+h2 {
+    text-align: center;
+}
+.svg-align {
+    margin: auto;
+    display: block;
 }

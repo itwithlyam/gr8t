@@ -10,14 +10,14 @@ export default function UserLocation() {
     const [buttonstate, changeButton] = useState(0)
     
 
-    console.log("hmmm") 
+    console.log(buttonstate) 
     fetch("http://77.68.127.58:8080/api/"+params.id).then(data => data.json()).then(payload => {
         if (!loc[0]) return setLoc(payload)
-        if (loc[0]._id != payload[0]._id) setLoc(payload)
+        if (loc[0]._id !== payload[0]._id) setLoc(payload)
     })
     fetch("http://77.68.127.58:8080/api/"+params.id+"/memberships").then(data => data.json()).then(payload => {
         if (!mem[0]) return setMem(payload)
-        if (mem[mem.length-1]._id != payload[mem.length-1]._id) setMem(payload)
+        if (mem[mem.length-1]._id !== payload[mem.length-1]._id) setMem(payload)
     })
 
     const member = () => {

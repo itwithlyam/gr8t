@@ -8,13 +8,13 @@ export default function Location() {
     const [members, setMembers] = useState({})
     const [counter, count] = useState(0)
 
-    if (counter == 0) {
+    if (counter === 0) {
         console.log("hmmm") 
         fetch("http://77.68.127.58:8080/api/"+params.id).then(data => data.json()).then(payload => {
             setLocation(payload)
             count(1)
         })
-    } else if (counter == 1) {
+    } else if (counter === 1) {
         console.log("hmmm") 
         fetch("http://77.68.127.58:8080/api/"+params.id+"/memberships").then(data => data.json()).then(payload => {
             setMembers(payload)
@@ -34,6 +34,7 @@ export default function Location() {
                   fetch("http://77.68.127.58:8080/api/"+location[0]._id, { method: "DELETE" })
                   window.location.href = "/dashboard"
                 }}>Delete</button></div>
+            <div className="center-div"><button className="loc-but loc-newplan" onClick={() => window.location.href="/dashboard/"+params.id+"/new"}>New plan</button></div>
         </div>
     )
 }

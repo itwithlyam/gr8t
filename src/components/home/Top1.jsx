@@ -8,9 +8,9 @@ export default class Top1 extends Component {
 				
 				<div className="column left t"><span>
 					Companies
-				</span></div>
+				</span></div> 
 				<div className="column middle t">
-					<span>Royalty Schemes</span>
+					<span>Loyalty Schemes</span>
 				</div>
 				<div className="column right t">
 					<span>Our Solution</span>
@@ -18,21 +18,21 @@ export default class Top1 extends Component {
 				
 				<div className="column left">
 					<span>
-						<img className="img" src="../../images/shop1.jpg" />
-						<img className="img" src="../../images/shop2.jpg" />
+						<img className="img" src="../../images/shop1.jpg" alt="shop" />
+						<img className="img" src="../../images/shop2.jpg" alt="shop" />
 					</span>
 				</div>
 				<div className="column middle">
 					<span>
-						<img className="img" src="../../images/loyalty1.jpg" />
-						<img className="img" src="../../images/loyalty2.jpg" />
+						<img className="img" src="../../images/loyalty1.jpg" alt="card" />
+						<img className="img" src="../../images/loyalty2.jpg" alt="card" />
 					</span>
 				</div>
 				<div className="column right">
 					<span>
-						insert picture of finished product here
+						<img className="img" src="../../images/logo.png" alt="what a gr8t logo" />
 						<br />
-						oh and here too
+						<h2>One loyalty card to rule them all</h2>
 					</span>
 				</div>
 			</div>

@@ -38,9 +38,9 @@ export default function Login({ setToken }) {
         username,
         password
       });
-      if (token.message == "user") {
+      if (token.message === "user") {
         setError("User not found")
-      } else if (token.message == "password") {
+      } else if (token.message === "password") {
         setError("Password incorrect")
       }
       console.log(token)

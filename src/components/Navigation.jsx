@@ -12,7 +12,7 @@ function Navigation() {
             <ul className="navbar-nav ml-auto">
               <li>
                 <NavLink className="navbar-brand" to="/">
-                  <img src="../../images/logo.png" style={{width: "40px"}} />
+                  <img src="../../images/logo.png" style={{width: "40px"}} alt="what a gr8t logo!" />
                 </NavLink>
               </li>
               <li className="nav-item">
