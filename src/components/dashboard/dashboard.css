@@ -67,3 +67,36 @@ h2 {
     margin: auto;
     display: block;
 }
+
+.svg-but-col-purple:hover {
+    fill:rgba(128, 0, 128, 0.8)
+}
+.svg-but-col-green:hover {
+    fill:rgba(0, 128, 0, 0.8)
+}
+.svg-but-col-blue:hover {
+    fill:rgba(0, 0, 128, 0.8)
+}
+.svg-but-col-red:hover {
+    fill:rgba(128, 0, 0, 0.8)
+}
+.svg-but-col-turquoise:hover {
+    fill:rgba(0, 128, 128, 0.8)
+}
+.svg-but-col-olive:hover {
+    fill:rgba(128, 128, 0, 0.8)
+}
+.svg-but-col-black:hover {
+    fill:rgba(128, 128, 128, 0.8)
+}
+
+.flex { 
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Optional */
+}
+
+input[type=radio] {
+    width: 25px;
+    height: 25px;
+}

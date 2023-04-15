@@ -16,6 +16,7 @@ import {
 ReactDOM.render(
   <Router>
     <Navigation />
+    <br />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />

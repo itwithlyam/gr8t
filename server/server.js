@@ -4,6 +4,9 @@ const app = express();
 import { uid } from "uid/secure";
 import { JsonDB, Config } from 'node-json-db';
 import crypto from 'node:crypto'
+import busboy from 'connect-busboy'
+import path from 'path'
+import fs from 'fs-extra'
 
 import { MongoClient, ObjectId } from 'mongodb';
 import * as dotenv from 'dotenv'
@@ -12,6 +15,8 @@ dotenv.config()
 
 app.use(cors());
 app.use(bodyParser.json())
+app.use(busboy());
+app.use(express.static(path.join("./", 'public')));
 
 const myLogger = function (req, res, next) {
   console.log('LOGGING: '+req.method+" "+req.originalUrl)
@@ -148,6 +153,23 @@ app.delete('/api/:location/memberships', (req, res) => {
 
     return res.send()
   })
+})
+
+// Images
+app.post('/images/card/logo', (req, res) => {
+  let fstream;
+  req.pipe(req.busboy);
+  req.busboy.on('file', function (fieldname, file, filename) {
+      console.log("Uploading: " + filename);
+
+      //Path where image will be uploaded
+      fstream = fs.createWriteStream("./" + '/img/' + filename);
+      file.pipe(fstream);
+      fstream.on('close', function () {    
+          console.log("Upload Finished of " + filename);              
+          res.redirect('back');           //where to go next
+      });
+  });
 })
 
 

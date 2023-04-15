@@ -1,40 +1,28 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from './logo.png'
 
 import './Nav.css'
 
 function Navigation() {
   return (
-    <div className="navigation">
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="container">
-          <div>
-            <ul className="navbar-nav ml-auto">
-              <li>
-                <NavLink className="navbar-brand" to="/">
-                  <img src="../../images/logo.png" style={{width: "40px"}} alt="what a gr8t logo!" />
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-right">
-                <NavLink className="nav-link" to="/dashboard">
-                  Dashboard
-                </NavLink>
-              </li>
-              <li className="nav-left">
-                <NavLink className="nav-link" to="/location">
-                  Locations
-                </NavLink>
-              </li>
-            </ul>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">
+          <img src={logo} alt="" width="30" height="24"/>
+        </a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            <a className="nav-link" href="/">Home</a>
+            <a className="nav-link" href="/location">Finder</a>
+            <a className="nav-link" href="/dashboard">Dashboard</a>
           </div>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }
 
