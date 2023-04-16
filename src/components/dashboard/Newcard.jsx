@@ -76,7 +76,7 @@ export default function Newcard() {
             <div className="center-div"><button className="loc-but" onClick={() => {
                   let ans = window.confirm("Are you sure you want to create this reward plan?")
                   if (!ans) return
-                  fetch("http://77.68.127.58:8080/api/"+params.id+"/plans", { method: "POST", body: JSON.stringify({
+                  fetch("http://77.68.127.58:8080/api/"+params.id+"/plan", { method: "POST", body: JSON.stringify({
                     shape: shape,
                     color: color,
                     stamps: stamps,
