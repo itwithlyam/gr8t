@@ -172,5 +172,40 @@ app.post('/images/card/logo', (req, res) => {
   });
 })
 
+app.post('/api/:location/plan', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("plans")
+    cl.insertOne({location: ObjectId(req.params.location), ...req.body})
+  
+    return res.send(req.body)
+  })
+})
+
+app.get('/api/:location/plan', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("plans")
+    let ret = await cl.find({location: ObjectId(req.params.location)}).toArray()
+    if (!ret) return res.status(400)
+  
+    return res.send(ret)
+  })
+})
+
+app.get('/api/:location/plan/:planid', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("plans")
+    let ret = await cl.findOne({_id: ObjectId(req.params.planid), location: ObjectId(req.params.location)})
+    if (!ret) return res.status(400)
+  
+    return res.send(ret)
+  })
+})
+
 
 app.listen(8080, () => console.log('API is running on http://localhost:8080/login'));
