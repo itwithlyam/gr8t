@@ -207,5 +207,53 @@ app.get('/api/:location/plan/:planid', (req, res) => {
   })
 })
 
+// app.post('/api/:location/plan/:planid/subs', (req, res) => {
+//   MongoClient.connect(process.env.URI, async (err, db) => {
+//     if (err) throw err
+//     db = db.db("gr8t")
+//     let cl = db.collection("plansubs")
+//     cl.insertOne({location: ObjectId(req.params.location), plan: ObjectId(req.params.planid), ...req.body})
+  
+//     return res.send(req.body)
+//   })
+// })
+
+app.post('/api/:location/plan/:planid/subs', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("plansubs")
+    let exist = await cl.findOne({location: ObjectId(req.params.location), plan: ObjectId(req.params.planid), user: req.body.user})
+    if (exist) return res.send({error: "already"})
+    console.log(req.body.user)
+    cl.insertOne({location: ObjectId(req.params.location), plan: ObjectId(req.params.planid), ...req.body})
+  
+    return res.send({})
+  })
+})
+
+app.get('/api/:location/plan/:planid/subs', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("plansubs")
+    let ret = await cl.find({plan: ObjectId(req.params.planid), location: ObjectId(req.params.location)}).toArray()
+    if (!ret) return res.status(400)
+  
+    return res.send(ret)
+  })
+})
+
+app.get('/api/:location/plan/:planid/subs/:user', (req, res) => {
+  MongoClient.connect(process.env.URI, async (err, db) => {
+    if (err) throw err
+    db = db.db("gr8t")
+    let cl = db.collection("plansubs")
+    let ret = await cl.findOne({plan: ObjectId(req.params.planid), location: ObjectId(req.params.location), user: req.params.user})
+    if (!ret) return res.status(400)
+  
+    return res.send(ret)
+  })
+})
 
 app.listen(8080, () => console.log('API is running on http://localhost:8080/login'));
