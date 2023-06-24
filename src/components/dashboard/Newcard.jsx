@@ -14,11 +14,10 @@ export default function Newcard() {
         <div>
             <h1>New membership plan</h1>
             <h2>Create your card</h2>
-            <svg version="1.1" width="900" height="240" xmlns="http://www.w3.org/2000/svg" className="svg-align">
+            {/* <svg version="1.1" width="900" height="240" xmlns="http://www.w3.org/2000/svg" className="svg-align">
                 <a href="#" onClick={() => changeShape(1)}><rect className="svg-but" x="60" y="20" width="180" height="180" fill={shape === 1 ? "rgba(128, 0, 128, 0.2)" : "purple"}/></a>
-                <a href="#" onClick={() => changeShape(2)}><rect className="svg-but" x="360" y="20" rx="60" ry="60" width="180" height="180" fill={shape === 2 ? "rgba(128, 0, 128, 0.2)" : "purple"}/></a>
-                <a href="#" onClick={() => changeShape(3)}><circle className="svg-but" cx="720" cy="110" r="90" fill={shape === 3 ? "rgba(128, 0, 128, 0.2)" : "purple"}/></a>
-            </svg>
+                <a href="#" onClick={() => changeShape(2)}><rect className="svg-but" x="720" y="20" rx="60" ry="60" width="180" height="180" fill={shape === 2 ? "rgba(128, 0, 128, 0.2)" : "purple"}/></a>
+            </svg> */}
             <h2>Colour</h2>
             {/* <FileInput /> */}
 
@@ -48,9 +47,9 @@ export default function Newcard() {
                 <a href="#" onClick={() => changeColor("olive")}><rect className="svg-but-col-olive" fill={color === "olive" ? "rgba(128, 128, 0, 0.2)" : "rgba(128, 128, 0, 1)"} x="350" width="60" height="60" /></a>
                 <a href="#" onClick={() => changeColor("black")}><rect className="svg-but-col-black" fill={color === "black" ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 1)"} x="420" width="60" height="60" /></a>
             </svg>
-            <div class="mb-3 flex">
+            {/* <div class="mb-3 flex">
                 <input className="form-control" type="file" id="formFile" style={{width: "30%"}} />
-            </div>
+            </div> */}
 
             <br /> 
 
@@ -63,6 +62,10 @@ export default function Newcard() {
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" onClick={() => changeStamps(10)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps2" value="option2" />
                     <label class="form-check-label" for="NumberOfStamps2"><h3>10</h3></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" onClick={() => changeStamps(15)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps3" value="option2" />
+                    <label class="form-check-label" for="NumberOfStamps3"><h3>15</h3></label>
                 </div>
             </div>
 
@@ -82,7 +85,9 @@ export default function Newcard() {
                     color: color,
                     stamps: stamps,
                     reward: document.getElementById("RewardInput").value
-                  })})
+                  }), headers: {
+                    "Content-Type": "application/json"
+                  }})
                   document.location.href = "/dashboard/"+params.id
                 }}>Create</button></div>
 

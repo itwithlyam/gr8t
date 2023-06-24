@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useParams } from "react-router-dom";
+import RenderPlan from '../plan/RenderPlan'
 
 export default function Plan() {
     const params = useParams()
@@ -26,7 +27,7 @@ export default function Plan() {
     return (
         <div>
             <h1>Plan</h1>
-            <h2>{plan.reward}</h2>
+            <RenderPlan color={plan.color} id={plan._id} reward={plan.reward} stamps={plan.stamps}/>
             <h3>Subscriptions: {subs.length}</h3>
             <div className="flex"><button className="loc-but loc-logout" onClick={() => window.location.href = "/dashboard/"+params.id}>
             Back

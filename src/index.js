@@ -12,7 +12,8 @@ import {
   UserLocation,
   Newcard,
   Plan,
-  MembersArea
+  MembersArea,
+  UserPlan
 } from "./components";
 
 ReactDOM.render(
@@ -28,6 +29,7 @@ ReactDOM.render(
       <Route path="/location/:id" element={<UserLocation />} />
       <Route path="/location/:id/members" element={<MembersArea />} />
       <Route path="/location" element={<UserLocations />} />
+      <Route path="/location/:locid/plan/:id" element={<UserPlan />} />
     </Routes>
     <Footer />
   </Router>,
