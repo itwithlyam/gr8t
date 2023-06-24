@@ -4,6 +4,7 @@ export { default as Home } from "./Home";
 export { default as Dashboard } from "./dashboard/Dashboard";
 export { default as Login } from "./Login"
 export { default as UserLocation } from "./Location"
+export { default as MembersArea } from "./Members"
 export { default as UserLocations } from "./Locations"
 export { default as Location } from "./dashboard/Location"
 export { default as Newcard } from "./dashboard/Newcard"
