@@ -71,7 +71,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                "$ref": "#/components/schemas/Location"
+                                "$ref": "#/components/schemas/LocationArray"
         post:
             summary: Register a new location
             requestBody:
@@ -80,7 +80,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: "#/components/schemas/Location"
+                            $ref: "#/components/schemas/LocationArray"
             responses:
                 "200":
                     description: Location registered
@@ -100,7 +100,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/Location"
+                                $ref: "#/components/schemas/LocationArray"
         delete:
             parameters:
                 - in: path
@@ -352,6 +352,10 @@ components:
                     type: string
                 user:
                     type: string
+        LocationArray:
+            type: array 
+            items:
+                $ref: "#/components/schemas/Location"
         Error:
             type: object
             required:
@@ -361,7 +365,6 @@ components:
                     description: A human readable error message
                     type: string
         Username:
-            description: Username
             type: string
         Auth:
             type: object
