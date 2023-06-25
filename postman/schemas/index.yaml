@@ -1,0 +1,441 @@
+---
+openapi: 3.0.0
+info:
+    version: 1.0.0
+    title: Gr8t
+    description: Interact with features of the Gr8t website
+paths:
+    "/users/login":
+        post:
+            summary: Login to an account
+            requestBody:
+                required: true
+                description: User credentials
+                content:
+                    application/json:
+                        schema:
+                            "$ref": "#/components/schemas/Credentials"
+            responses:
+                "200":
+                    description: A randomly generated Auth Token
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/Auth"
+                "403":
+                    description: Bad password
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/Error"
+                "404":
+                    description: User not found
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/Error"
+    "/users":
+        post:
+            summary: Create a new account
+            requestBody:
+                description: User credentials
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            "$ref": "#/components/schemas/Credentials"
+            responses:
+                "200":
+                    description: A randomly generated Auth Token
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/Auth"
+    "/locations":
+        get:
+            summary: Get all the registered locations
+            parameters:
+                - in: query
+                  name: id
+                  schema:
+                      type: string
+                  description: Filter by ID
+                - in: query
+                  name: user
+                  schema:
+                      type: string
+                  description: Filter by user (owner)
+            responses:
+                "200":
+                    description: All locations meeting the filter
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/Location"
+        post:
+            summary: Register a new location
+            requestBody:
+                description: Location data
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Location"
+            responses:
+                "200":
+                    description: Location registered
+    "/{location}":
+        get:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            summary: Find a location by ID
+            responses:
+                "200":
+                    description: Location found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Location"
+        delete:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            summary: Delete a location
+            responses:
+                "204":
+                    description: Location deleted
+
+    "/{location}/memberships":
+        get:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            summary: See memberships for a location
+            responses:
+                "200":
+                    description: Memberships for a location
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Membership"
+        post:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            requestBody:
+                description: Membership data
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Username"
+            summary: Add membership to a location
+            responses:
+                "200":
+                    description: Membership added
+                "400":
+                    description: Membership already exists
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+        delete:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            requestBody:
+                description: Membership data
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Username"
+            summary: Cancel membership for a user at a location
+            responses:
+                "204":
+                    description: Membership cancelled
+
+    "/{location}/plan":
+        get:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            summary: Get plans for a location
+            responses:
+                "200":
+                    description: Plans for a location
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Plan"
+                "400":
+                    description: Location has no plans
+        post:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+            requestBody:
+                description: Plan data
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Plan"
+            summary: Add a plan to a location
+            responses:
+                "200":
+                    description: Plan added
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Plan"
+
+    "/{location}/plan/{plan}":
+        get:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+                - in: path
+                  name: plan
+                  required: true
+                  schema:
+                      type: string
+                  description: Plan ID
+            summary: Get plan data by ID
+            responses:
+                "200":
+                    description: Plan data
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Plan"
+                "400":
+                    description: Plan does not exist
+
+    "/{location}/plan/{plan}/subs":
+        get:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+                - in: path
+                  name: plan
+                  required: true
+                  schema:
+                      type: string
+                  description: Plan ID
+            summary: Get plan subscription data by ID
+            responses:
+                "200":
+                    description: Plan subscription data
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Sub"
+                "400":
+                    description: Plan does not exist or no subs registered
+        post:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+                - in: path
+                  name: plan
+                  required: true
+                  schema:
+                      type: string
+                  description: Plan ID
+            requestBody:
+                description: User data
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Username"
+            summary: Subscribe to a plan
+            responses:
+                "200":
+                    description: User is subscribed successfully
+                "400":
+                    description: User is already subscribed
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+
+    "/{location}/plan/{plan}/subs/{user}":
+        get:
+            parameters:
+                - in: path
+                  name: location
+                  required: true
+                  schema:
+                      type: string
+                  description: Location ID
+                - in: path
+                  name: plan
+                  required: true
+                  schema:
+                      type: string
+                  description: Plan ID
+                - in: path
+                  name: user
+                  required: true
+                  schema:
+                      type: string
+                  description: User
+            summary: Check if user is subscribed to a plan
+            responses:
+                "200":
+                    description: User subscription
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Sub"
+                "400":
+                    description: User is not subscribed
+
+components:
+    schemas:
+        ID:
+            description: Unique identifier of every resource
+            type: string
+        Location:
+            type: object
+            required:
+                - _id
+                - name
+                - user
+            properties:
+                _id:
+                    "$ref": "#/components/schemas/ID"
+                name:
+                    type: string
+                user:
+                    type: string
+        Error:
+            type: object
+            required:
+                - message
+            properties:
+                message:
+                    description: A human readable error message
+                    type: string
+        Username:
+            description: Username
+            type: string
+        Auth:
+            type: object
+            required:
+                - token
+            properties:
+                token:
+                    type: string
+        Credentials:
+            type: object
+            required:
+                - username
+                - password
+            properties:
+                username:
+                    $ref: "#/components/schemas/Username"
+                password:
+                    type: string
+        Membership:
+            type: object
+            required:
+                - _id
+                - user
+                - location
+            properties:
+                user:
+                    $ref: "#/components/schemas/Username"
+                location:
+                    $ref: "#/components/schemas/ID"
+                _id:
+                    "$ref": "#/components/schemas/ID"
+        Plan:
+            type: object
+            required:
+                - _id
+                - location
+                - stamps
+                - reward
+                - color
+                - shape
+            properties:
+                _id:
+                    $ref: "#/components/schemas/ID"
+                location:
+                    $ref: "#/components/schemas/ID"
+                stamps:
+                    type: number
+                reward:
+                    type: string
+                color:
+                    type: string
+                shape:
+                    type: number
+        Sub:
+            type: object
+            required:
+                - _id
+                - location
+                - plan
+                - user
+            properties:
+                _id:
+                    $ref: "#/components/schemas/ID"
+                location:
+                    $ref: "#/components/schemas/ID"
+                plan:
+                    $ref: "#/components/schemas/ID"
+                user:
+                    $ref: "#/components/schemas/Username"
+    securitySchemes:
+        Token:
+            type: apiKey
+            in: header
+            name: X-Token
+
+security:
+    - Token: []
