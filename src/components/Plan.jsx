@@ -7,6 +7,7 @@ export default function Plan() {
 
     let [locname, setLocname] = useState("")
     let [loc, setLoc] = useState({})
+    let [subbed, setSubbed] = useState(false)
 
     const goToLocation = () => window.location.href = window.location.href.replace("/plan/"+params.id, "")
 
@@ -14,6 +15,8 @@ export default function Plan() {
         if (!payload.user) {
             alert("Permission denied")
             goToLocation()
+        } else {
+            setSubbed(true)
         }
     })
     fetch("http://localhost:8080/api/"+params.locid+"/plan/"+params.id).then(data => data.json()).then(payload => {
@@ -32,8 +35,10 @@ export default function Plan() {
             headers: {"Content-Type": "application/json"}
         }).then(data => data.json()).then(payload => {
             if (payload.error) {
+                setSubbed(true)
                 alert("Already a member!")
             } else {
+                setSubbed(true)
                 alert("Successfully joined!")
             }
         })
@@ -43,5 +48,6 @@ export default function Plan() {
         <RenderPlan id={loc._id} stamps={loc.stamps} reward={loc.reward} shape={loc.shape} color={loc.color} loc={locname}/><br />
         <div className="loc-but-div"><button className="loc-but" onClick={subscribe}>Join this plan</button></div>
         <div className="loc-but-div"><button className="loc-but loc-logout" onClick={goToLocation}>Return</button></div>
+        {subbed ? <p>Subscribed!</p> : ""}
     </div>
 }
