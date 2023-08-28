@@ -12,13 +12,13 @@ export default function Plan() {
 
     if (counter === 0) {
         console.log("hmmm") 
-        fetch("http://77.68.127.58:8080/api/"+params.id+"/plan/"+params.planid).then(data => data.json()).then(payload => {
+        fetch("http://localhost:8080/api/"+params.id+"/plan/"+params.planid).then(data => data.json()).then(payload => {
             setPlan(payload)
             count(1)
         })
     } else if (counter === 1) {
         console.log("hmmm") 
-        fetch("http://77.68.127.58:8080/api/"+params.id+"/plan/"+params.planid+"/subs").then(data => data.json()).then(payload => {
+        fetch("http://localhost:8080/api/"+params.id+"/plan/"+params.planid+"/subs").then(data => data.json()).then(payload => {
             setSubs(payload)
             count(2)
         })

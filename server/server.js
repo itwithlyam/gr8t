@@ -13,7 +13,7 @@ import * as dotenv from 'dotenv'
 import bodyParser from 'body-parser';
 dotenv.config()
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json())
 app.use(busboy());
 app.use(express.static(path.join("./", 'public')));

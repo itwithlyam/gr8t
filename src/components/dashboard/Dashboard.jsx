@@ -17,7 +17,7 @@ function Dashboard() {
 
   if (counter === 0) {
     console.log("hmmm") 
-    fetch("http://77.68.127.58:8080/api/locations?user="+localStorage.getItem("uname")).then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/locations?user="+localStorage.getItem("uname")).then(data => data.json()).then(payload => {
       setLocations(payload)
       count(1)
     })
@@ -43,7 +43,7 @@ function Dashboard() {
           <button className="loc-but" onClick={() => {
                   let ans = prompt("Location name")
                   if (!ans) return
-                  fetch("http://77.68.127.58:8080/api/locations", {
+                  fetch("http://localhost:8080/api/locations", {
                     method: "POST",
                     body: JSON.stringify({ name: ans, user: localStorage.getItem("uname") }),
                     headers: {"Content-Type": "application/json"}

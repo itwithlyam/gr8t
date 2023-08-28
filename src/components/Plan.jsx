@@ -10,23 +10,23 @@ export default function Plan() {
 
     const goToLocation = () => window.location.href = window.location.href.replace("/plan/"+params.id, "")
 
-    fetch("http://77.68.127.58:8080/api/"+params.locid+"/plan/"+params.id+"/subs/"+localStorage.getItem("uname")).then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/"+params.locid+"/plan/"+params.id+"/subs/"+localStorage.getItem("uname")).then(data => data.json()).then(payload => {
         if (!payload.user) {
             alert("Permission denied")
             goToLocation()
         }
     })
-    fetch("http://77.68.127.58:8080/api/"+params.locid+"/plan/"+params.id).then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/"+params.locid+"/plan/"+params.id).then(data => data.json()).then(payload => {
         if (loc._id !== payload._id) setLoc(payload)
     })
-    fetch("http://77.68.127.58:8080/api/"+params.locid).then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/"+params.locid).then(data => data.json()).then(payload => {
         if (locname !== payload[0].name) setLocname(payload[0].name)
     })
 
     if (!loc._id) return <p>Loading, please wait...</p>
 
     const subscribe = () => {
-        fetch("http://77.68.127.58:8080/api/"+params.locid+"/plan/"+params.id+"/subs", {
+        fetch("http://localhost:8080/api/"+params.locid+"/plan/"+params.id+"/subs", {
             method: "POST",
             body: JSON.stringify({user: localStorage.getItem("uname")}),
             headers: {"Content-Type": "application/json"}

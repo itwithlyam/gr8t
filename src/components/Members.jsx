@@ -10,17 +10,17 @@ export default function Members() {
 
     const goToLocation = () => window.location.href = window.location.href.replace("/members", "")
 
-    fetch("http://77.68.127.58:8080/api/"+params.id+"/memberships").then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/"+params.id+"/memberships").then(data => data.json()).then(payload => {
         if (!payload.some(e => e.user === localStorage.getItem("uname"))) {
             alert("Permission denied")
             goToLocation()
         }
     })
-    fetch("http://77.68.127.58:8080/api/"+params.id).then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/"+params.id).then(data => data.json()).then(payload => {
         if (!loc) return setLoc(payload[0])
         if (loc._id !== payload[0]._id) setLoc(payload[0])
     })
-    fetch("http://77.68.127.58:8080/api/"+params.id+"/plan").then(data => data.json()).then(payload => {
+    fetch("http://localhost:8080/api/"+params.id+"/plan").then(data => data.json()).then(payload => {
         setPlans(payload)
     })
 
