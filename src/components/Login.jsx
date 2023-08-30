@@ -51,8 +51,12 @@ export default function Login({ setToken }) {
         username,
         password
       });
-      localStorage.setItem('uname', username)
-      setToken(token);
+      if (token.message) setError("User already exists")
+      else {
+        console.log(token)
+        localStorage.setItem('uname', username)
+        setToken(token);
+      }
     }
   }
 
