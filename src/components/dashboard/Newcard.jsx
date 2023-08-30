@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useParams } from "react-router-dom";
 import './dashboard.css'
+import RenderPlan from "../plan/RenderPlan";
 
 
 export default function Newcard() {
@@ -8,7 +9,13 @@ export default function Newcard() {
     const [shape, changeShape] = useState(0)
     const [color, changeColor] = useState("")
     const [stamps, changeStamps] = useState(5)
+    const [loc, setLoc] = useState({})
     console.log(params)
+
+    if (loc.name) fetch("http://localhost:8080/api/"+params.locid).then(data => data.json()).then(payload => {
+        setLoc(payload)
+    })
+
 
     return (
         <div>
@@ -47,7 +54,7 @@ export default function Newcard() {
                 <a href="#" onClick={() => changeColor("olive")}><rect className="svg-but-col-olive" fill={color === "olive" ? "rgba(128, 128, 0, 0.2)" : "rgba(128, 128, 0, 1)"} x="350" width="60" height="60" /></a>
                 <a href="#" onClick={() => changeColor("black")}><rect className="svg-but-col-black" fill={color === "black" ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 1)"} x="420" width="60" height="60" /></a>
             </svg>
-            {/* <div class="mb-3 flex">
+            {/* <div className="mb-3 flex">
                 <input className="form-control" type="file" id="formFile" style={{width: "30%"}} />
             </div> */}
 
@@ -55,25 +62,25 @@ export default function Newcard() {
 
             <h2>Stamps</h2>
             <div className="flex">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" onClick={() => changeStamps(5)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps1" value="option1" />
-                    <label class="form-check-label" for="NumberOfStamps1"><h3>5</h3></label>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" onClick={() => changeStamps(5)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps1" value="option1" />
+                    <label className="form-check-label" form="NumberOfStamps1"><h3>5</h3></label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" onClick={() => changeStamps(10)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps2" value="option2" />
-                    <label class="form-check-label" for="NumberOfStamps2"><h3>10</h3></label>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" onClick={() => changeStamps(10)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps2" value="option2" />
+                    <label className="form-check-label" form="NumberOfStamps2"><h3>10</h3></label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" onClick={() => changeStamps(15)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps3" value="option2" />
-                    <label class="form-check-label" for="NumberOfStamps3"><h3>15</h3></label>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" onClick={() => changeStamps(15)} type="radio" name="NumberOfStampsOptions" id="NumberOfStamps3" value="option2" />
+                    <label className="form-check-label" form="NumberOfStamps3"><h3>15</h3></label>
                 </div>
             </div>
 
             <br />
             
             <h2>Reward</h2>
-            <div class="mb-3 flex">
-                <input type="text" class="form-control text-center" id="RewardInput" placeholder="Discount, product, etc." style={{width: "30%"}} />
+            <div className="mb-3 flex">
+                <input type="text" className="form-control text-center" id="RewardInput" placeholder="Discount, product, etc." style={{width: "30%"}} />
             </div>
 
             <div className="center-div"><button className="loc-but" onClick={() => {
@@ -90,7 +97,7 @@ export default function Newcard() {
                   }})
                   document.location.href = "/dashboard/"+params.id
                 }}>Create</button></div>
-
+            {document.getElementById("RewardInput") != null ? <RenderPlan id={0} color={color} loc={loc.name} stamps={stamps} reward={document.getElementById("RewardInput").value} shape={shape} /> : <RenderPlan id={0} color={color} loc={loc.name} stamps={stamps} reward={"My plan"} shape={shape} />}
         </div>
     )
 }
